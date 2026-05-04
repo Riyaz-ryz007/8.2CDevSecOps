@@ -2,45 +2,33 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
-                echo 'Build the code using Maven as the build automation tool.'
+                git branch: 'main', url: 'https://github.com/Riyaz-ryz007/8.2CDevSecOps.git'
             }
         }
 
-        stage('Unit and Integration Tests') {
+        stage('Install Dependencies') {
             steps {
-                echo 'Run unit tests using Jest and integration tests using Mocha.'
+                sh 'npm install'
             }
         }
 
-        stage('Code Analysis') {
+        stage('Run Tests') {
             steps {
-                echo 'Analyse code quality using SonarCloud.'
+                sh 'npm test || true'
             }
         }
 
-        stage('Security Scan') {
+        stage('Generate Coverage Report') {
             steps {
-                echo 'Run security scanning using npm audit and Snyk.'
+                sh 'npm run coverage || true'
             }
         }
 
-        stage('Deploy to Staging') {
+        stage('NPM Audit Security Scan') {
             steps {
-                echo 'Deploy the application to a staging server such as AWS EC2.'
-            }
-        }
-
-        stage('Integration Tests on Staging') {
-            steps {
-                echo 'Run integration tests on the staging environment using Postman/Newman.'
-            }
-        }
-
-        stage('Deploy to Production') {
-            steps {
-                echo 'Deploy the application to a production server such as AWS EC2.'
+                sh 'npm audit || true'
             }
         }
     }
