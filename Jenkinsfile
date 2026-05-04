@@ -1,7 +1,12 @@
 pipeline {
     agent any
 
+    environment {
+        SONAR_TOKEN = credentials('sonar-token')
+    }
+
     stages {
+
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/Riyaz-ryz007/8.2CDevSecOps.git'
@@ -29,6 +34,21 @@ pipeline {
         stage('NPM Audit Security Scan') {
             steps {
                 sh 'npm audit || true'
+            }
+        }
+
+        stage('SonarCloud Analysis') {
+            steps {
+                sh '''
+                npm install -g sonar-scanner
+
+                sonar-scanner \
+                -Dsonar.projectKey=Riyaz-ry2007_8.2CDevSecOps \
+                -Dsonar.organization=Riyaz-ry2007 \
+                -Dsonar.sources=. \
+                -Dsonar.host.url=https://sonarcloud.io \
+                -Dsonar.login=$SONAR_TOKEN
+                '''
             }
         }
     }
