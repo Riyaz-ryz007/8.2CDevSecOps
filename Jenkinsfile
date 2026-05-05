@@ -38,18 +38,18 @@ pipeline {
         }
 
         stage('SonarCloud Analysis') {
-            steps {
-                sh '''
-                npm install -g sonar-scanner
+    steps {
+        sh '''
+        npm install sonar-scanner --save-dev
 
-                sonar-scanner \
-                -Dsonar.projectKey=Riyaz-ry2007_8.2CDevSecOps \
-                -Dsonar.organization=Riyaz-ry2007 \
-                -Dsonar.sources=. \
-                -Dsonar.host.url=https://sonarcloud.io \
-                -Dsonar.login=$SONAR_TOKEN
-                '''
-            }
-        }
+        npx sonar-scanner \
+        -Dsonar.projectKey=Riyaz-ry2007_8.2CDevSecOps \
+        -Dsonar.organization=Riyaz-ry2007 \
+        -Dsonar.sources=. \
+        -Dsonar.host.url=https://sonarcloud.io \
+        -Dsonar.login=$SONAR_TOKEN
+        '''
+    }
+}
     }
 }
