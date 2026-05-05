@@ -44,7 +44,7 @@ pipeline {
 
         npx sonar-scanner \
         -Dsonar.projectKey=Riyaz-ryz007_8.2CDevSecOps \
-        -Dsonar.organization=Riyaz-ryz007 \
+        -Dsonar.organization=riyaz-ryz007 \
         -Dsonar.sources=. \
         -Dsonar.host.url=https://sonarcloud.io \
         -Dsonar.login=$SONAR_TOKEN
