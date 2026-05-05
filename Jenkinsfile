@@ -43,8 +43,8 @@ pipeline {
         npm install sonar-scanner --save-dev
 
         npx sonar-scanner \
-        -Dsonar.projectKey=Riyaz-ry007_8.2CDevSecOps \
-        -Dsonar.organization=Riyaz-ry007 \
+        -Dsonar.projectKey=Riyaz-ryz007_8.2CDevSecOps \
+        -Dsonar.organization=Riyaz-ryz007 \
         -Dsonar.sources=. \
         -Dsonar.host.url=https://sonarcloud.io \
         -Dsonar.login=$SONAR_TOKEN
